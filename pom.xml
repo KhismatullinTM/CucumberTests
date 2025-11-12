@@ -8,110 +8,157 @@
     <artifactId>demoqa-cucumber</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <dependencies>
+    <!-- Версии в одном месте -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>21</maven.compiler.release>
 
-        <!-- JUnit 5 -->
+        <allure.version>2.29.0</allure.version>
+        <allure.report.version>2.30.0</allure.report.version>
+
+        <junit.jupiter.version>5.11.3</junit.jupiter.version>
+        <junit.platform.version>1.14.0</junit.platform.version>
+        <cucumber.version>7.31.0</cucumber.version>
+        <selenide.version>7.12.0</selenide.version>
+        <logback.version>1.5.13</logback.version>
+        <wdm.version>6.3.2</wdm.version>
+    </properties>
+
+    <dependencies>
+        <!-- Allure (оставлены твои версии) -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit-platform</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+        <!-- Этот артефакт обычно не обязателен как dependency.
+             Его можно оставить, но плагин allure-maven и установленная CLI обычно хватает. -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-commandline</artifactId>
+            <version>${allure.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- JUnit 5 / Platform -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.11.3</version>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.11.3</version>
+            <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-engine</artifactId>
-            <version>1.14.0</version>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>1.14.0</version>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-commons</artifactId>
-            <version>1.14.0</version>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite</artifactId>
-            <version>1.14.0</version>
+            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- Cucumber + JUnit 5 Runner -->
+        <!-- Cucumber JUnit Platform -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.31.0</version>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit-platform-engine</artifactId>
-            <version>7.31.0</version>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
 
+        <!-- Логи -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.5.13</version>
+            <version>${logback.version}</version>
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenide (тянет Selenium) -->
+        <!-- UI-стек -->
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>7.12.0</version>
+            <version>${selenide.version}</version>
         </dependency>
-
-        <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>6.3.2</version>
+            <version>${wdm.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-
-            <!-- Java -->
+            <!-- Компилятор -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <release>21</release>
+                    <release>${maven.compiler.release}</release>
                 </configuration>
             </plugin>
 
-            <!-- Correct Cucumber + JUnit Platform execution -->
+            <!-- Тесты + директория результатов Allure -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
+            <!-- Плагин отчёта Allure -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
+                <configuration>
+                    <reportVersion>${allure.report.version}</reportVersion>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
+

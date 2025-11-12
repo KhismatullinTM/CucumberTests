@@ -5,6 +5,9 @@
 Функционал: Тестирование 'DemoQA.com'
 
   @Test-1
+  @Epic("Автоматизация_WEB-приложения_DemoQA")
+    @Feature("Alerts,Frame&Windows")
+    @Story("Nested_Frames")
   Сценарий: Проверка вложенных фреймов
     Дано открыт сайт DemoQA.com
     Когда пользователь нажимает по карточке "Alerts, Frame & Windows"
@@ -24,6 +27,9 @@
     Тогда отображается текст "Sample Nested Iframe page"
 
   @Test-2
+  @Epic("Автоматизация_WEB-приложения_DemoQA")
+    @Feature("Widgets")
+    @Story("Progress_Bar")
   Сценарий: Проверка progress bar-а на странице Widgets - Progress Bar
     Дано открыт сайт DemoQA.com
     Когда пользователь нажимает по карточке "Widgets"
@@ -36,6 +42,9 @@
     Тогда кнопка снова отображает "Start"
 
   @Test-3
+    @Epic("Автоматизация_WEB-приложения_DemoQA")
+    @Feature("Widgets")
+    @Story("Select_Menu")
   Структура сценария: Проверка select-ов на странице Widgets - Select Menu
     Дано открыт сайт DemoQA.com
     Когда пользователь нажимает по карточке "Widgets"
