@@ -12,9 +12,11 @@ import static io.cucumber.junit.platform.engine.Constants.*;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "cucumber")
-@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, html:target/cucumber-report.html")
+@ConfigurationParameter(
+        key = PLUGIN_PROPERTY_NAME,
+        value = "pretty, html:target/cucumber-report.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+)
 @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@WebTest")
-@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm")
 public class Runner {
 
 }

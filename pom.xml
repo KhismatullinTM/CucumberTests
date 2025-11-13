@@ -141,14 +141,15 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <useModulePath>false</useModulePath>
+                    <includes>
+                        <include>**/Runner.java</include>
+                    </includes>
                     <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <allure.results.directory>allure-results</allure.results.directory>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
 
-            <!-- Плагин отчёта Allure -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
