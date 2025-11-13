@@ -8,7 +8,6 @@
     <artifactId>demoqa-cucumber</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Версии в одном месте -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
@@ -25,7 +24,7 @@
     </properties>
 
     <dependencies>
-        <!-- Allure (оставлены твои версии) -->
+
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
@@ -42,8 +41,7 @@
             <artifactId>allure-junit-platform</artifactId>
             <version>${allure.version}</version>
         </dependency>
-        <!-- Этот артефакт обычно не обязателен как dependency.
-             Его можно оставить, но плагин allure-maven и установленная CLI обычно хватает. -->
+
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-commandline</artifactId>
@@ -51,7 +49,13 @@
             <type>pom</type>
         </dependency>
 
-        <!-- JUnit 5 / Platform -->
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber7-jvm -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>2.30.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -89,7 +93,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Cucumber JUnit Platform -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -103,7 +106,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Логи -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -111,7 +113,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- UI-стек -->
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
@@ -126,7 +127,6 @@
 
     <build>
         <plugins>
-            <!-- Компилятор -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -136,7 +136,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Тесты + директория результатов Allure -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -149,7 +148,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Плагин отчёта Allure -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
