@@ -30,6 +30,9 @@ public class StepDef {
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
         Configuration.timeout = 12000;
+        if (System.getProperty("selenide.remote") != null) {
+            Configuration.remote = System.getProperty("selenide.remote");
+        }
         if (WebDriverRunner.hasWebDriverStarted()) {
             clearBrowserCookies();
             clearBrowserLocalStorage();
